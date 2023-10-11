@@ -1,0 +1,183 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../css/jquery.fancybox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/bootstrap5.css">
+    <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<!-- <h1 class="bg-dark title text-light p-0">
+    DES Algorithm Implementation
+</h1> -->
+<section class="p-3 bg-dark">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-light text-center">DES Algorithm Implementation</h1>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="p-5 bg-primary">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+<!--            <form>-->
+                <div class="input-group mb-3">
+                    <!-- <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div> -->
+                    <p class="lead text-light">
+                        Put the <span class="text-warning">PlainText</span> and <span class="text-warning">SecretKey</span> Here
+                        SecretKey should be at length of 8.
+                    </p>
+                    <input type="text" class="form-control" placeholder="PlainText" name="PlainText" id="plainText"></input>
+                    <input id="clearfile" type="file" style="display: none">
+                    <a class="btn btn-dark" id="fileUpload" onclick="$('input[id=clearfile]').click();">Upload</a>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="SecretKey" id="Key">
+                </div>
+                <button class="btn btn-light center" id="encrypt">
+                    <span class=""></span>
+                    Submit
+                </button>
+<!--            </form>&lt;!&ndash;100% width auto height&ndash;&gt;-->
+        </div>
+
+        <script>
+            // 绑定上传文件按钮的change事件
+            $('input[id=clearfile]').on('change', function(e) {
+                var file = e.target.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // 读取文件内容并将其显示在输入框中
+                    var fileContent = e.target.result;
+                    console.log(fileContent)
+                    $('input[name=PlainText]').val(fileContent);
+                };
+
+                reader.readAsText(file);
+            });
+        </script>
+        <div class="col-md p-5 text-light">
+            <h3>Encrypt Text</h3>
+            <textarea type="text" class="form-control" placeholder="Encrypted Content" id="EncryptedMsg"></textarea>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section class="p-5 bg-black">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-md">
+<!--            <form>-->
+                <div class="input-group mb-3">
+                    <p class="lead text-light">
+                        Put the <span class="text-warning">Encoded Text</span> and <span class="text-warning">SecretKey</span> Here
+                        SecretKey should be at length of 8.
+                    </p>
+                    <input type="text" class="form-control" placeholder="PlainText" name="PlainText2" id="plainText2"></input>
+                    <input id="clearfile2" type="file" style="display: none">
+                    <a class="btn btn-light" id="fileUpload2" onclick="$('input[id=clearfile2]').click();">Upload</a>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="appearance" placeholder="SecretKey" id="Key2">
+                </div>
+                <button class="btn btn-light center" id="decrypt">
+                    <span class=""></span>
+                    Submit
+                </button>
+<!--            </form>&lt;!&ndash;100% width auto height&ndash;&gt;-->
+        </div>
+        <div class="col-md p-5 text-light">
+            <h3>Plain Text</h3>
+            <textarea type="text" class="form-control" placeholder="Encrypted Content" id="DecryptedMsg"></textarea>
+        </div>
+
+        <script>
+            $('input[id=clearfile2]').on('change', function(e) {
+                var file = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var fileContent = e.target.result;
+                    console.log(fileContent)
+                    $('input[name=PlainText2]').val(fileContent);
+                };
+                reader.readAsText(file);
+            });
+        </script>
+
+        <script>
+            // 绑定点击事件
+            $('#encrypt').click(function() {
+                // 获取明文和密钥的值
+                var plainText = $('#plainText').val();
+                var secretKey = $('#Key').val();
+
+                // 使用AJAX发送GET请求
+                $.ajax({
+                    url: '/Encrypt', // 接口地址
+                    type: 'GET', // 请求类型
+                    data: {
+                        plainText: plainText, // 明文
+                        secretKey: secretKey // 密钥
+                    },
+                    success: function(response) {
+                        // 请求成功时的回调函数
+                        console.log('加密结果:', response);
+                        $('#EncryptedMsg').val(response)
+                        // 在此处处理加密结果
+                    },
+                    error: function(xhr, status, error) {
+                        // 请求失败时的回调函数
+                        console.log('请求失败:', error);
+                        // 在此处处理请求失败的情况
+                    }
+                });
+            });
+
+
+            // 绑定点击事件
+            $('#decrypt').click(function() {
+                // 获取明文和密钥的值
+                var plainText = $('#plainText2').val();
+                var secretKey = $('#Key2').val();
+
+                // 使用AJAX发送GET请求
+                $.ajax({
+                    url: '/Decrypt', // 接口地址
+                    type: 'GET', // 请求类型
+                    data: {
+                        plainText: plainText, // 明文
+                        secretKey: secretKey // 密钥
+                    },
+                    success: function(response) {
+                        // 请求成功时的回调函数
+                        console.log('加密结果:', response);
+                        $('#DecryptedMsg').val(response)
+                        // 在此处处理加密结果
+                    },
+                    error: function(xhr, status, error) {
+                        // 请求失败时的回调函数
+                        console.log('请求失败:', error);
+                        // 在此处处理请求失败的情况
+                    }
+                });
+            });
+        </script>
+
+    </div>
+    </div>
+
+</section>
+
+
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.header
+{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background: #ededed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+button {
+    position: relative;
+    padding: 10px 40px;
+    margin: -30px 15px 10px 0px;
+    float: left;
+    border-radius: 3px;
+    font-size: 20px;
+    color: #FFF;
+    text-decoration: none;
+    background-color: #2ecc71;
+    border: none;
+    border-bottom: 5px solid #27ae60;
+    text-shadow: 0px -2px #27ae60;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+button:hover, button:active {
+    -webkit-transform: translate(0px,5px);
+    -ms-transform: translate(0px,5px);
+    transform: translate(0px,5px);
+    border-bottom: 1px solid #2ecc71;
+}
+
+
+.container{
+    height: 760px;
+    width: 900px;
+    border-radius: 4px;
+    border: 0.5px solid #e0e0e0;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-flow: column;
+    overflow: hidden;
+}
+
+.content{
+    width: calc(100% - 40px);
+    padding: 20px;
+    overflow-y: scroll;
+    flex: 1;
+}
+.content:hover::-webkit-scrollbar-thumb{
+    background:rgba(0,0,0,0.1);
+}
+.bubble{
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    color: #000;
+    word-wrap:break-word;
+    word-break:normal;
+}
+.item-left .bubble{
+    font-size: 22px;
+    margin-left: 15px;
+    background-color: #83abe7;
+}
+.item-left .bubble:before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #83abe7;
+    border-bottom: 10px solid transparent;
+    left: -20px;
+}
+.item-right .bubble{
+    font-size: 22px;
+    right: 10px;
+    background-color: #9eea6a;
+}
+.item-right .bubble:before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid #9eea6a;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    right: -20px;
+}
+.item{
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+}
+.item.item-right{
+    justify-content: flex-end;
+}
+.item.item-center{
+    justify-content: center;
+}
+.item.item-center span{
+    padding: 2px 4px;
+    color: #fff;
+    background-color: #dadada;
+    border-radius: 3px;
+    -moz-user-select:none; /*火狐*/
+    -webkit-user-select:none; /*webkit浏览器*/
+    -ms-user-select:none; /*IE10*/
+    -khtml-user-select:none; /*早期浏览器*/
+    user-select:none;
+}
+
+.avatar img{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+.input-area{
+    border-top:0.5px solid #e0e0e0;
+    height: 150px;
+    display: flex;
+    flex-flow: column;
+    background-color: #fff;
+}
+textarea{
+    flex: 1;
+    padding: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    overflow-y: auto;
+    overflow-x: hidden;
+    outline:none;
+    resize:none;
+}
+.button-area{
+    display: flex;
+    margin-right: 10px;
+    line-height: 40px;
+    padding: 5px;
+    justify-content: flex-end;
+}
+
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width:10px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow:inset006pxrgba(0,0,0,0.3);
+    border-radius:8px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background:rgba(0,0,0,0);
+    -webkit-box-shadow:inset006pxrgba(0,0,0,0.5);
+}

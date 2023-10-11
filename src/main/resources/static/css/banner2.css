@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+#container {
+    position: relative;
+    width: 500px;
+    height: 260px;
+    margin: 20px auto;
+    overflow: hidden;
+    /*溢出隐藏：只显示一张图片*/
+}
+
+#container .parent {
+    position: absolute;
+    width: 3000px;
+    /*整个图片层长度：500*5=2500*/
+    height: 260px;
+}
+
+#container .parent li {
+    float: left;
+    width: 500px;
+    height: 100%;
+}
+
+#container .parent li img {
+    width: 100%;
+    height: 100%;
+}
+
+#container .btnLeft,
+#container .btnRight {
+    width: 30px;
+    height: 30px;
+    background-color: #9E9E9E;
+    border-radius: 20%;
+    opacity: 80%;
+    position: absolute;
+    /*包含块为图片显示层container*/
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 20px;
+    color: #f40;
+    text-align: center;
+    line-height: 30px;
+}
+
+#container .btnLeft {
+    left: 10px;
+}
+
+#container .btnRight {
+    right: 10px;
+}
+
+#container .btnLeft:hover,
+#container .btnRight:hover {
+    opacity: 90%;
+    cursor: pointer;
+}
+
+/*蒙层*/
+#container .modal {
+    width: 100%;
+    height: 40px;
+    background: rgba(0, 0, 0, .3);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    line-height: 40px;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+#container .modal .title {
+    float: left;
+    color: #fff;
+    font-size: 12px;
+}
+
+#container .modal .dots {
+    float: right;
+    position: absolute;
+    bottom: 10px;
+    left: 340px;
+}
+
+#container .modal .dots li {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    float: left;
+    /*可以使用行块盒*/
+    /*display: inline-block;*/
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.on {
+    background-color: red;
+}
+
+.off {
+    background-color: gray;
+}
